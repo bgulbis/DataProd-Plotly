@@ -2,18 +2,19 @@
 title: "Developing Data Products"
 subtitle: "Plotly Assignment"
 author: "Brian Gulbis"
-date: '`r format(Sys.Date(), "%B %d, %Y")`'
-output: html_document
+date: "October 2, 2016"
+output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r}
+knitr::opts_chunk$set(echo = FALSE)
 library(dplyr)
 library(plotly)
+```
 
+## My Plotly Plot
+
+```{r, warning=FALSE, message=FALSE}
 df <- readr::read_csv("plotly_data.csv") %>%
     group_by(group, year)
 
@@ -27,4 +28,3 @@ plot_ly(data = df,
            xaxis = list(title = "Days on Warfarin"),
            yaxis = list(title = "Mean Warfarin Dose (mg)"))
 ```
-
