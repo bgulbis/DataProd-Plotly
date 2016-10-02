@@ -1,0 +1,30 @@
+---
+title: "Developing Data Products"
+subtitle: "Plotly Assignment"
+author: "Brian Gulbis"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(plotly)
+
+df <- readr::read_csv("plotly_data.csv") %>%
+    group_by(group, year)
+
+plot_ly(data = df, 
+        x = ~warf.day, 
+        y = ~dose.mean, 
+        colors = "Set1") %>%
+    add_markers(symbol = ~group) %>%
+    add_lines(color = ~as.factor(year)) %>%
+    layout(title = "Warfarin Dosing by Service",
+           xaxis = list(title = "Days on Warfarin"),
+           yaxis = list(title = "Mean Warfarin Dose (mg)"))
+```
+
